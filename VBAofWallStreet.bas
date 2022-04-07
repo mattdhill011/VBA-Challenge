@@ -9,7 +9,7 @@ Sub StockLoop()
     Cells(1, 11).Value = "Percent Change"
     Cells(1, 12).Value = "Total Stock Volume"
     
-    Range("O7").Value = "Percent Completed:"
+    
     
     Dim currentTicker As String
     Dim yearlyChange As Double
@@ -55,9 +55,7 @@ Sub StockLoop()
     
     Dim i As Long
     For i = 2 To numRows
-        'I wanted a to add a progress bar so I know how long it will take and to know that it hasnt stopped working on me
-        Range("P7").Value = FormatPercent((i / numRows), 0)
-    
+
         'Keep a running total of the stock volume, we reset it to 0 everytime we meet a new ticker
         stockVolume = stockVolume + Cells(i, 7).Value
     
@@ -146,10 +144,7 @@ Sub StockLoop()
         Formula1:="=0"
     yearlyChangeRange.FormatConditions(2).Interior.ColorIndex = 4
     
-    'Change the progress bar to green
-    Range("P7").Interior.ColorIndex = 4
-    Range("P7").Value = "Done!"
-    
+        
                      
 End Sub
 
