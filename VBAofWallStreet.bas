@@ -143,22 +143,12 @@ Sub StockLoop()
     yearlyChangeRange.FormatConditions.Add Type:=xlCellValue, Operator:=xlGreater, _
         Formula1:="=0"
     yearlyChangeRange.FormatConditions(2).Interior.ColorIndex = 4
+
+    'Now that we're done lets autofit the columns that we worked on
+    Range("A1:Q1").Columns.AutoFit
     
         
                      
-End Sub
-
-
-'I just added this so I could clear everything and run it again for testing
-Sub Clear()
-    Dim numRows As Long
-    Dim rangeValue As String
-    
-    numRows = Range("A1").End(xlDown).Row
-    rangeValue = "Q" & numRows
-    
-    Range("I1", rangeValue).Clear
-    
 End Sub
 
 
