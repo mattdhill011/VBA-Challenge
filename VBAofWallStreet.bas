@@ -1,9 +1,7 @@
-Attribute VB_Name = "Module1"
 Sub StockLoop()
 
     'First we set up the headers for the output data table
-    'I figure that I could just set this up on the spreadsheet but I dont want to do it for every sheet and I like having it here so I can keep track of what number the cells are
-    
+        
     Cells(1, 9).Value = "Ticker"
     Cells(1, 10).Value = "Yearly Change"
     Cells(1, 11).Value = "Percent Change"
@@ -31,25 +29,7 @@ Sub StockLoop()
     stockVolume = 0
     
     'Now we figure out how many rows there are, I found this function that goes to the bottom of a range and outputs the row that it is
-    numRows = Range("A1").End(xlDown).Row
-      
-      
-    'This chunk of code is for setting up the bonus
-    
-    Cells(1, 16).Value = "Ticker"
-    Cells(1, 17).Value = "Value"
-    Cells(2, 15).Value = "Greatest % Increase"
-    Cells(3, 15).Value = "Greatest % Decrease"
-    Cells(4, 15).Value = "Greatest Total Volume"
-    
-    Dim greatestIncrease As Double
-    Dim greatestDecrease As Double
-    Dim greatestVolume As Double
-    
-    greatestIncrease = 0
-    greatestDecrease = 0
-    greatestVolume = 0
-        
+    numRows = Range("A1").End(xlDown).Row   
     
       
     
@@ -86,30 +66,8 @@ Sub StockLoop()
             
             'Output the current total stock volume
             Cells(tickerLine, 12).Value = stockVolume
-            
-            
-            'Now we do the bonus: first checking if the percent change is higher than the greatest, or lower than the lowest
-            If (percentChange > greatestIncrease) Then
-                greatestIncrease = percentChange
-                Cells(2, 16).Value = Cells(i, 1).Value
-                Cells(2, 17).Value = FormatPercent(greatestIncrease)
-                
-            ElseIf (percentChange < greatestDecrease) Then
-                greatestDecrease = percentChange
-                Cells(3, 16).Value = Cells(i, 1).Value
-                Cells(3, 17).Value = FormatPercent(greatestDecrease)
-            End If
-            
-            'Then we check if the stock volume is larger than the current largest
-            If (stockVolume > greatestVolume) Then
-                greatestVolume = stockVolume
-                Cells(4, 16).Value = Cells(i, 1).Value
-                Cells(4, 17).Value = greatestVolume
-            End If
-            
-            
-                                    
-            'Advances the row for the output data table, so next time we do this its a row lower
+
+        'Advances the row for the output data table, so next time we do this its a row lower
             tickerLine = tickerLine + 1
             
             'sets open price back to 0 so the first conditional will trigger in the next loop
@@ -118,6 +76,8 @@ Sub StockLoop()
             'And set stock volume to 0 se we can count up again for the next loop
             stockVolume = 0
         
+            
+            
         End If
     Next i
     
@@ -145,7 +105,7 @@ Sub StockLoop()
     yearlyChangeRange.FormatConditions(2).Interior.ColorIndex = 4
 
     'Now that we're done lets autofit the columns that we worked on
-    Range("A1:Q1").Columns.AutoFit
+    Range("A:Q").Columns.AutoFit
     
         
                      
